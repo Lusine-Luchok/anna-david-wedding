@@ -1,1 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Anna & David | 10.10.2027</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ivory: #f7f3ec;
+      --paper: #eee7dc;
+      --espresso: #332820;
+      --gold: #b69a68;
+      --sage: #8b927d;
+      --white: #fffdf9;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--ivory);
+      color: var(--espresso);
+      font-family: "Montserrat", sans-serif;
+      overflow-x: hidden;
+    }
+
+    img,
+    video {
+      width: 100%;
+      display: block;
+    }
+
+    /* =========================
+       OPENING SCREEN
+    ========================== */
+
+    #opening {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 20% 15%, rgba(255,255,255,.85), transparent 28%),
+        radial-gradient(circle at 80% 80%, rgba(184,164,140,.18), transparent 30%),
+        #e9e2d8;
+      transition: opacity 1.1s ease, visibility 1.1s ease;
+    }
+
+    #opening.hide {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .opening-inner {
+      width: 100%;
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    .tiny-title {
+      margin-bottom: 34px;
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      opacity: .65;
+    }
+
+    .envelope-wrap {
+      width: min(540px, 88vw);
+      height: min(350px, 58vw);
+      max-height: 350px;
+      min-height: 240px;
+      margin: auto;
+      position: relative;
+      perspective: 1200px;
+      cursor: pointer;
+      filter: drop-shadow(0 25px 28px rgba(50, 40, 30, .16));
+    }
+
+    .envelope {
+      position: absolute;
+      inset: 0;
+      border-radius: 3px;
+      background: #eee8de;
+      overflow: hidden;
+    }
+
+    .envelope::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(145deg, transparent 49.5%, rgba(190,178,160,.45) 50%, transparent 50.7%),
+        linear-gradient(215deg, transparent 49.5%, rgba(190,178,160,.45) 50%, transparent 50.7%);
+      opacity: .65;
+    }
+
+    .flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 58%;
+      z-index: 5;
+      transform-origin: top center;
+      transition: transform 1.2s cubic-bezier(.65,0,.25,1);
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      background: linear-gradient(180deg, #f7f2e9, #e6ddd0);
+      backface-visibility: hidden;
+    }
+
+    .card {
+      position: absolute;
+      z-index: 3;
+      width: 84%;
+      height: 84%;
+      left: 8%;
+      bottom: 5%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(182,154,104,.08), transparent 25%),
+        #fffdf8;
+      border: 1px solid rgba(182,154,104,.25);
+      box-shadow: 0 10px 30px rgba(60,50,40,.12);
+      transition: transform 1.4s cubic-bezier(.2,.75,.25,1) .55s;
+    }
+
+    .card-small {
+      margin-bottom: 18px;
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: .65;
+    }
+
+    .card h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(40px, 8vw, 70px);
+      font-weight: 300;
+      line-height: .9;
+    }
+
+    .card .amp {
+      display: block;
+      margin: 4px 0;
+      color: var(--gold);
+      font-style: italic;
+      font-size: .65em;
+    }
+
+    .card-date {
+      margin-top: 20px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 17px;
+      letter-spacing: 5px;
+    }
+
+    .seal {
+      position: absolute;
+      z-index: 10;
+      left: 50%;
+      top: 49%;
+      transform: translate(-50%, -50%);
+      width: 82px;
+      height: 82px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      color: #f4e8cd;
+      background:
+        radial-gradient(circle at 32% 27%, #d0b77f 0 7%, transparent 8%),
+        radial-gradient(circle at 50% 50%, #b69658, #8d713e 72%);
+      border: 3px double rgba(255,240,205,.45);
+      box-shadow:
+        0 7px 13px rgba(63,45,23,.35),
+        inset 0 0 0 5px rgba(120,89,40,.18);
+      font-family: "Cormorant Garamond", serif;
+      font-size: 23px;
+      font-style: italic;
+      transition: all .55s ease;
+    }
+
+    .tap-text {
+      margin-top: 38px;
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: .55;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity: .35; }
+      50% { opacity: .9; }
+    }
+
+    .envelope-wrap.open .flap {
+      transform: rotateX(180deg);
+    }
+
+    .envelope-wrap.open .seal {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(.6);
+    }
+
+    .envelope-wrap.open .card {
+      transform: translateY(-52%);
+    }
+
+    /* =========================
+       WEBSITE
+    ========================== */
+
+    #site {
+      opacity: 0;
+      transition: opacity 1.5s ease;
+    }
+
+    #site.show {
+      opacity: 1;
+    }
+
+    .hero {
+      min-height: 100svh;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      overflow: hidden;
+      background: #111;
+    }
+
+    .hero img {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to top, rgba(20,14,10,.68), rgba(20,14,10,.02) 60%),
+        linear-gradient(to bottom, rgba(20,14,10,.1), transparent 35%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      padding: 60px 20px 70px;
+      text-align: center;
+      color: white;
+    }
+
+    .eyebrow {
+      font-size: 9px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 300;
+      font-size: clamp(60px, 13vw, 120px);
+      line-height: .8;
+    }
+
+    .hero h1 span {
+      display: block;
+      font-style: italic;
+      font-size: .55em;
+      color: #ead8b4;
+      margin: 12px 0;
+    }
+
+    .hero-date {
+      margin-top: 30px;
+      letter-spacing: 6px;
+      font-size: 11px;
+    }
+
+    section {
+      padding: 100px 7%;
+    }
+
+    .intro {
+      max-width: 850px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .section-label {
+      color: var(--gold);
+      text-transform: uppercase;
+      font-size: 9px;
+      letter-spacing: 5px;
+      margin-bottom: 25px;
+    }
+
+    .intro h2,
+    .details-title,
+    .gallery-title,
+    .rsvp h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 300;
+      font-size: clamp(44px, 7vw, 75px);
+      line-height: 1;
+    }
+
+    .intro p {
+      max-width: 610px;
+      margin: 30px auto 0;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 21px;
+      line-height: 1.65;
+      opacity: .78;
+    }
+
+    /* COUNTDOWN */
+
+    .countdown-section {
+      padding-top: 20px;
+      text-align: center;
+    }
+
+    .countdown {
+      max-width: 800px;
+      margin: 35px auto 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid rgba(51,40,32,.18);
+      border-bottom: 1px solid rgba(51,40,32,.18);
+    }
+
+    .count-item {
+      padding: 30px 10px;
+      border-right: 1px solid rgba(51,40,32,.18);
+    }
+
+    .count-item:last-child {
+      border-right: none;
+    }
+
+    .count-number {
+      display: block;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 43px;
+      font-weight: 300;
+    }
+
+    .count-name {
+      font-size: 8px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: .55;
+    }
+
+    /* DETAILS */
+
+    .details {
+      background: var(--espresso);
+      color: var(--ivory);
+      text-align: center;
+    }
+
+    .details-title {
+      margin-bottom: 65px;
+    }
+
+    .event-grid {
+      max-width: 900px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(255,255,255,.16);
+    }
+
+    .event {
+      padding: 65px 35px;
+      background: var(--espresso);
+    }
+
+    .event-number {
+      font-family: "Cormorant Garamond", serif;
+      color: var(--gold);
+      font-style: italic;
+      font-size: 18px;
+    }
+
+    .event h3 {
+      margin: 18px 0;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 39px;
+      font-weight: 300;
+    }
+
+    .event p {
+      font-size: 11px;
+      line-height: 2;
+      letter-spacing: 1px;
+      opacity: .7;
+    }
+
+    .event-time {
+      display: block;
+      margin-top: 22px;
+      color: #dbc69e;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 24px;
+    }
+
+    /* VIDEO */
+
+    .film {
+      padding: 0;
+      height: 90svh;
+      position: relative;
+      overflow: hidden;
+      background: #111;
+    }
+
+    .film video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .film::after {
+      content: "ANNA  ×  DAVID";
+      position: absolute;
+      left: 50%;
+      bottom: 45px;
+      transform: translateX(-50%);
+      color: white;
+      white-space: nowrap;
+      font-size: 9px;
+      letter-spacing: 5px;
+    }
+
+    /* GALLERY */
+
+    .gallery {
+      text-align: center;
+    }
+
+    .gallery-title {
+      margin-bottom: 55px;
+    }
+
+    .gallery-grid {
+      max-width: 1100px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+    }
+
+    .gallery-grid img {
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .g1 {
+      grid-column: span 7;
+      height: 620px;
+    }
+
+    .g2 {
+      grid-column: span 5;
+      height: 620px;
+      padding-top: 90px;
+    }
+
+    .g3 {
+      grid-column: span 4;
+      height: 500px;
+    }
+
+    .g4 {
+      grid-column: span 4;
+      height: 500px;
+      margin-top: 70px;
+    }
+
+    .g5 {
+      grid-column: span 4;
+      height: 500px;
+    }
+
+    /* DRESS CODE */
+
+    .dress {
+      background: #e8e0d5;
+      text-align: center;
+    }
+
+    .dress h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(45px, 7vw, 75px);
+      font-weight: 300;
+    }
+
+    .dress p {
+      margin-top: 20px;
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    .colors {
+      margin: 40px auto 0;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .color {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: 4px solid rgba(255,255,255,.55);
+    }
+
+    .c1 { background: #1c1917; }
+    .c2 { background: #655247; }
+    .c3 { background: #9b927f; }
+    .c4 { background: #d5c2a1; }
+
+    /* RSVP */
+
+    .rsvp {
+      min-height: 75vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .rsvp p {
+      max-width: 500px;
+      margin: 25px auto;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 20px;
+      line-height: 1.5;
+    }
+
+    .rsvp-button {
+      display: inline-block;
+      margin: 25px auto 0;
+      padding: 17px 40px;
+      color: var(--ivory);
+      background: var(--espresso);
+      text-decoration: none;
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      transition: .3s ease;
+    }
+
+    .rsvp-button:hover {
+      background: var(--gold);
+    }
+
+    footer {
+      padding: 55px 20px;
+      text-align: center;
+      color: var(--ivory);
+      background: var(--espresso);
+    }
+
+    footer h3 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 38px;
+      font-weight: 300;
+    }
+
+    footer p {
+      margin-top: 13px;
+      font-size: 8px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: .55;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 700px) {
+      section {
+        padding: 80px 22px;
+      }
+
+      .envelope-wrap {
+        height: 255px;
+      }
+
+      .seal {
+        width: 70px;
+        height: 70px;
+      }
+
+      .hero {
+        min-height: 100svh;
+      }
+
+      .hero img {
+        object-position: 53% center;
+      }
+
+      .countdown {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .count-item:nth-child(2) {
+        border-right: none;
+      }
+
+      .count-item:nth-child(-n+2) {
+        border-bottom: 1px solid rgba(51,40,32,.18);
+      }
+
+      .event-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 9px;
+      }
+
+      .g1,
+      .g2,
+      .g3,
+      .g4,
+      .g5 {
+        grid-column: auto;
+        height: 310px;
+        padding: 0;
+        margin: 0;
+      }
+
+      .g1 {
+        grid-column: span 2;
+        height: 480px;
+      }
+
+      .g4 {
+        grid-column: span 2;
+        height: 430px;
+      }
+
+      .film {
+        height: 75svh;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- OPENING ENVELOPE -->
+
+  <div id="opening">
+    <div class="opening-inner">
+
+      <div class="tiny-title">You are invited</div>
+
+      <div class="envelope-wrap" id="envelope" onclick="openInvitation()">
+
+        <div class="envelope"></div>
+
+        <div class="card">
+          <div class="card-small">The wedding of</div>
+
+          <h1>
+            Anna
+            <span class="amp">&</span>
+            David
+          </h1>
+
+          <div class="card-date">10 · 10 · 2027</div>
+        </div>
+
+        <div class="flap"></div>
+
+        <div class="seal">A&D</div>
+
+      </div>
+
+      <div class="tap-text">Tap the seal to open</div>
+
+    </div>
+  </div>
+
+
+  <!-- MAIN WEBSITE -->
+
+  <main id="site">
+
+    <!-- HERO -->
+
+    <section class="hero">
+      <img src="Annaa-1.png" alt="Anna and David">
+
+      <div class="hero-content">
+        <div class="eyebrow">We're getting married</div>
+
+        <h1>
+          Anna
+          <span>&</span>
+          David
+        </h1>
+
+        <div class="hero-date">10 · 10 · 2027</div>
+      </div>
+    </section>
+
+
+    <!-- INTRO -->
+
+    <section>
+      <div class="intro">
+
+        <div class="section-label">Together with our families</div>
+
+        <h2>
+          We invite you to celebrate<br>
+          our love story.
+        </h2>
+
+        <p>
+          With joyful hearts, we invite you to join us as we begin
+          the next chapter of our lives together.
+          Your presence would make our day truly unforgettable.
+        </p>
+
+      </div>
+    </section>
+
+
+    <!-- COUNTDOWN -->
+
+    <section class="countdown-section">
+
+      <div class="section-label">Until we say “I do”</div>
+
+      <div class="countdown">
+
+        <div class="count-item">
+          <span class="count-number" id="days">00</span>
+          <span class="count-name">Days</span>
+        </div>
+
+        <div class="count-item">
+          <span class="count-number" id="hours">00</span>
+          <span class="count-name">Hours</span>
+        </div>
+
+        <div class="count-item">
+          <span class="count-number" id="minutes">00</span>
+          <span class="count-name">Minutes</span>
+        </div>
+
+        <div class="count-item">
+          <span class="count-number" id="seconds">00</span>
+          <span class="count-name">Seconds</span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CEREMONY / RECEPTION -->
+
+    <section class="details">
+
+      <div class="section-label">October 10, 2027</div>
+
+      <h2 class="details-title">The Wedding Day</h2>
+
+      <div class="event-grid">
+
+        <div class="event">
+          <div class="event-number">01</div>
+
+          <h3>Ceremony</h3>
+
+          <p>
+            ST. SARGIS CHURCH<br>
+            YEREVAN, ARMENIA
+          </p>
+
+          <span class="event-time">15:30</span>
+        </div>
+
+        <div class="event">
+          <div class="event-number">02</div>
+
+          <h3>Reception</h3>
+
+          <p>
+            DVIN MUSIC HALL<br>
+            YEREVAN, ARMENIA
+          </p>
+
+          <span class="event-time">18:00</span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- VIDEO -->
+
+    <section class="film">
+
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+      >
+        <source src="Anna-video .mp4" type="video/mp4">
+      </video>
+
+    </section>
+
+
+    <!-- GALLERY -->
+
+    <section class="gallery">
+
+      <div class="section-label">Our story</div>
+
+      <h2 class="gallery-title">A few moments of us</h2>
+
+      <div class="gallery-grid">
+
+        <div class="g1">
+          <img src="Annaa-1.png" alt="Anna and David">
+        </div>
+
+        <div class="g2">
+          <img src="Annaa-2.jpg" alt="Anna and David">
+        </div>
+
+        <div class="g3">
+          <img src="Annaa-3.jpg" alt="Anna and David">
+        </div>
+
+        <div class="g4">
+          <img src="Annaa-4 .png" alt="Anna and David">
+        </div>
+
+        <div class="g5">
+          <img src="Annaa-5 .jpg" alt="Anna and David">
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- DRESS CODE -->
+
+    <section class="dress">
+
+      <div class="section-label">Attire</div>
+
+      <h2>Black Tie / Elegant</h2>
+
+      <p>We would love to see you in these tones</p>
+
+      <div class="colors">
+        <div class="color c1"></div>
+        <div class="color c2"></div>
+        <div class="color c3"></div>
+        <div class="color c4"></div>
+      </div>
+
+    </section>
+
+
+    <!-- RSVP -->
+
+    <section class="rsvp">
+
+      <div class="section-label">Kindly respond</div>
+
+      <h2>Will you join us?</h2>
+
+      <p>
+        Please let us know if you will be celebrating
+        this beautiful day with us.
+      </p>
+
+      <a href="#" class="rsvp-button">
+        RSVP
+      </a>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+      <h3>Anna & David</h3>
+      <p>We can't wait to celebrate with you · 10.10.2027</p>
+    </footer>
+
+  </main>
+
+
+  <script>
+
+    function openInvitation() {
+
+      const envelope = document.getElementById("envelope");
+      const opening = document.getElementById("opening");
+      const site = document.getElementById("site");
+
+      envelope.classList.add("open");
+
+      setTimeout(() => {
+        opening.classList.add("hide");
+        site.classList.add("show");
+      }, 2300);
+
+    }
+
+
+    /* COUNTDOWN */
+
+    const weddingDate = new Date("October 10, 2027 15:30:00").getTime();
+
+    function updateCountdown() {
+
+      const now = new Date().getTime();
+      const distance = weddingDate - now;
+
+      if (distance <= 0) {
+        document.getElementById("days").innerText = "00";
+        document.getElementById("hours").innerText = "00";
+        document.getElementById("minutes").innerText = "00";
+        document.getElementById("seconds").innerText = "00";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+      const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) /
+        (1000 * 60 * 60)
+      );
+
+      const minutes = Math.floor(
+        (distance % (1000 * 60 * 60)) /
+        (1000 * 60)
+      );
+
+      const seconds = Math.floor(
+        (distance % (1000 * 60)) /
+        1000
+      );
+
+      document.getElementById("days").innerText = days;
+      document.getElementById("hours").innerText =
+        String(hours).padStart(2, "0");
+
+      document.getElementById("minutes").innerText =
+        String(minutes).padStart(2, "0");
+
+      document.getElementById("seconds").innerText =
+        String(seconds).padStart(2, "0");
+
+    }
+
+    updateCountdown();
+
+    setInterval(updateCountdown, 1000);
+
+  </script>
+
+</body>
+</html>
